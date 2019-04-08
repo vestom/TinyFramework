@@ -5,16 +5,21 @@
  *      Author: tov
  */
 
-#ifdef _TF_TEST_
 
 #include <stdio.h>
 #include "TF/TF.h"
+
+// Avoid compiling if source file is added by accident in top project
+#ifdef _TF_TEST_
+
+
 #include "TF/Log.h"
 #include "TF/Serial.h"
 #include "TF/Thread.h"
 #include "TF/Timer.h"
 #include "TF/Event.h"
 #include "TF/MsgQueue.h"
+
 
 TF::Event event;
 TF::MsgQueue queue;

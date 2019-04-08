@@ -8,6 +8,9 @@
 #ifndef TF_H_
 #define TF_H_
 
+// Include configuration of top project
+#include "TF_Config.h"
+
 namespace TF {
 
 } /* namespace TF */

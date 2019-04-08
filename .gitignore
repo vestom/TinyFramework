@@ -1,0 +1,19 @@
+
+# CMake files
+build/
+CMakeCache.txt
+CMakeFiles/
+Makefile
+*.cmake
+
+# Eclipse files
+Release/
+Debug/
+.settings
+
+# VSCode files
+.vscode/
+
+# Editor backup files
+*~
+*.orig
