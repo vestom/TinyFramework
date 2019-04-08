@@ -5,6 +5,9 @@
  *      Author: tov
  */
 
+#include "TF/TF.h"
+#ifdef _TF_OS_LINUX_
+
 #include "TF/Mutex.h"
 #include "TF/Log.h"
 
@@ -34,3 +37,5 @@ void Mutex::unlock() {
 }
 
 } /* namespace TF */
+
+#endif

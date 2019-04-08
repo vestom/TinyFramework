@@ -5,6 +5,9 @@
  *      Author: tov
  */
 
+#include "TF/TF.h"
+#ifdef _TF_OS_LINUX_
+
 #include "TF/Event.h"
 #include "TF/Log.h"
 #include <pthread.h>
@@ -68,3 +71,5 @@ void Event::set() {
 }
 
 } /* namespace TF */
+
+#endif

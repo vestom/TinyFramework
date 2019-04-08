@@ -8,7 +8,9 @@
 #ifndef TF_EVENT_H_
 #define TF_EVENT_H_
 
+#ifdef _TF_OS_LINUX_
 #include <pthread.h>
+#endif
 
 namespace TF {
 
@@ -29,8 +31,12 @@ public:
 
 private:
     volatile bool	flag;
-	pthread_mutex_t mutex_id;
+
+#ifdef _TF_OS_LINUX_
+    pthread_mutex_t mutex_id;
     pthread_cond_t  cond_id;
+#endif
+
 };
 
 } /* namespace TF */

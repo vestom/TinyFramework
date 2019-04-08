@@ -5,6 +5,9 @@
  *      Author: tov
  */
 
+#include "TF/TF.h"
+#ifdef _TF_OS_LINUX_
+
 #include "TF/Thread.h"
 #include "TF/Log.h"
 
@@ -93,3 +96,5 @@ void Thread::thread_func(Thread* p_this) {
 }
 
 } /* namespace TF */
+
+#endif

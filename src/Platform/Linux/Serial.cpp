@@ -5,6 +5,9 @@
  *      Author: tov
  */
 
+#include "TF/TF.h"
+#ifdef _TF_OS_LINUX_
+
 #include "TF/Serial.h"
 #include "TF/Log.h"
 
@@ -93,3 +96,5 @@ int Serial::getRxBytes(void) {
 }
 
 } /* namespace TF */
+
+#endif

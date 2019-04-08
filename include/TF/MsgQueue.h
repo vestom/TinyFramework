@@ -8,6 +8,7 @@
 #ifndef TF_MSGQUEUE_H_
 #define TF_MSGQUEUE_H_
 
+#include <stddef.h>
 #include <stdint.h>
 
 #include "TF/Mutex.h"

@@ -11,6 +11,11 @@
 // Include configuration of top project
 #include "TF_Config.h"
 
+// Automatic configure OS
+#ifdef __linux__
+#define _TF_OS_LINUX_
+#endif
+
 namespace TF {
 
 } /* namespace TF */

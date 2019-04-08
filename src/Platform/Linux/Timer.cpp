@@ -4,8 +4,10 @@
  *  Created on: Oct 19, 2016
  *      Author: tov
  */
-#include "TF/Timer.h"
+#include "TF/TF.h"
+#ifdef _TF_OS_LINUX_
 
+#include "TF/Timer.h"
 #include "TF/Log.h"
 
 
@@ -21,7 +23,6 @@ namespace TF {
 //}
 
 
-#ifdef __linux__
 #include <time.h>
 
 long Timer::get_ms(void) {
@@ -38,7 +39,7 @@ long Timer::get_tick(void) {
 	return (ts.tv_nsec);
 }
 
-#endif
-
 } /* namespace TF */
+
+#endif
 

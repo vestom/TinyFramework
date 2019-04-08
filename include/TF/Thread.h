@@ -8,7 +8,9 @@
 #ifndef TF_THREAD_H_
 #define TF_THREAD_H_
 
+#ifdef _TF_OS_LINUX_
 #include <pthread.h>
+#endif
 
 namespace TF {
 
@@ -36,8 +38,9 @@ protected:
 	virtual void run(void) = 0;
 
 private:
+#ifdef _TF_OS_LINUX_
 	pthread_t thread_id;	// Thread ID
-
+#endif
 	// Static thread function
 	static void	thread_func(Thread *p_this);
 

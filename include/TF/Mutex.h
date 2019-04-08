@@ -8,7 +8,9 @@
 #ifndef TF_MUTEX_H_
 #define TF_MUTEX_H_
 
+#ifdef _TF_OS_LINUX_
 #include <pthread.h>
+#endif
 
 namespace TF {
 
@@ -20,7 +22,10 @@ public:
 	void unlock();
 
 private:
+
+#ifdef _TF_OS_LINUX_
 	pthread_mutex_t mutex_id;
+#endif _TF_OS_LINUX_
 
 };
 
