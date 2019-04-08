@@ -25,14 +25,14 @@ namespace TF {
 
 #include <time.h>
 
-long Timer::get_ms(void) {
+TimeStamp Timer::get_ms(void) {
 	struct timespec ts;
 	int ret = clock_gettime(CLOCK_MONOTONIC, &ts);
 	if (ret) { Log::error("clock_gettime() : %i", ret); }
 	return ((ts.tv_sec * 1000) + (ts.tv_nsec/1000000));
 }
 
-long Timer::get_tick(void) {
+TimeStamp Timer::get_tick(void) {
 	struct timespec ts;
 	int ret = clock_gettime(CLOCK_MONOTONIC, &ts);
 	if (ret) { Log::error("clock_gettime() : %i", ret); }

@@ -70,6 +70,10 @@ void Event::set() {
 	if(ret) { Log::error("pthread_cond_signal(): %s", strerror(ret)); }
 }
 
+
+bool Event::is_set()   { return flag; }
+
+
 } /* namespace TF */
 
 #endif

@@ -11,6 +11,10 @@
 #ifdef _TF_OS_LINUX_
 #include <pthread.h>
 #endif
+#ifdef _TF_OS_FREERTOS_
+#include "FreeRTOS.h"
+#include "os_task.h"
+#endif
 
 namespace TF {
 
@@ -38,11 +42,15 @@ protected:
 	virtual void run(void) = 0;
 
 private:
+    // Static thread function
+    static void thread_func(Thread *p_this);
+
 #ifdef _TF_OS_LINUX_
 	pthread_t thread_id;	// Thread ID
 #endif
-	// Static thread function
-	static void	thread_func(Thread *p_this);
+#ifdef _TF_OS_FREERTOS_
+	TaskHandle_t thread_id;
+#endif
 
 };
 

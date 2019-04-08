@@ -11,6 +11,10 @@
 #ifdef _TF_OS_LINUX_
 #include <pthread.h>
 #endif
+#ifdef _TF_OS_FREERTOS_
+#include "FreeRTOS.h"
+#include "os_semphr.h"
+#endif _TF_OS_FREERTOS_
 
 namespace TF {
 
@@ -27,15 +31,19 @@ public:
 	// Set the event and signal any waiting threads
 	void set();
 
-	bool is_set()	{ return flag; }
+	// Test event without waiting or clearing
+	bool is_set();
 
 private:
-    volatile bool	flag;
 
 #ifdef _TF_OS_LINUX_
+    volatile bool   flag;
     pthread_mutex_t mutex_id;
     pthread_cond_t  cond_id;
 #endif
+#ifdef _TF_OS_FREERTOS_
+    SemaphoreHandle_t mutex_id;
+#endif _TF_OS_FREERTOS_
 
 };
 

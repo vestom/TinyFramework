@@ -10,9 +10,11 @@
 
 namespace TF {
 
+typedef unsigned long TimeStamp;
+
 class Timer {
 public:
-	Timer(long _timeout_ms)	{ timeout_ms = _timeout_ms; reset(); };
+	Timer(TimeStamp _timeout_ms)	{ timeout_ms = _timeout_ms; reset(); };
 	virtual ~Timer() {};
 
 	/// Reset timer to current time
@@ -26,17 +28,17 @@ public:
 	bool is_expired(void)	const	{ return ( (get_ms()-timestamp) > timeout_ms); }; // Overflow OK!
 
 	/// Get number of milliseconds since beginning
-	static long get_ms(void);
+	static TimeStamp get_ms(void);
 
 	/// Get high res tick of platform defined resolution (may often roll over)
-	static long get_tick(void);
+	static TimeStamp get_tick(void);
 
 private:
 	// milliseconds to timeout
-	long timeout_ms;
+	TimeStamp timeout_ms;
 
 	// timestamp of last reset
-	long timestamp;
+	TimeStamp timestamp;
 };
 
 } /* namespace TF */
