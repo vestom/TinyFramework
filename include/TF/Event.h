@@ -14,7 +14,7 @@
 #ifdef _TF_OS_FREERTOS_
 #include "FreeRTOS.h"
 #include "os_semphr.h"
-#endif _TF_OS_FREERTOS_
+#endif
 
 namespace TF {
 
@@ -43,7 +43,7 @@ private:
 #endif
 #ifdef _TF_OS_FREERTOS_
     SemaphoreHandle_t mutex_id;
-#endif _TF_OS_FREERTOS_
+#endif
 
 };
 

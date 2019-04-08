@@ -6,7 +6,7 @@
  */
 
 #include "TF/TF.h"
-#ifdef _TF_OS_LINUX_
+#ifdef _TF_HAL_LINUX_
 
 #include "TF/Serial.h"
 #include "TF/Log.h"

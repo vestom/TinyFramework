@@ -10,11 +10,11 @@
 
 #ifdef _TF_OS_LINUX_
 #include <pthread.h>
-#endif _TF_OS_LINUX_
+#endif
 #ifdef _TF_OS_FREERTOS_
 #include "FreeRTOS.h"
 #include "os_semphr.h"
-#endif _TF_OS_FREERTOS_
+#endif
 
 namespace TF {
 
@@ -29,10 +29,10 @@ private:
 
 #ifdef _TF_OS_LINUX_
 	pthread_mutex_t mutex_id;
-#endif _TF_OS_LINUX_
+#endif
 #ifdef _TF_OS_FREERTOS_
 	SemaphoreHandle_t mutex_id;
-#endif _TF_OS_FREERTOS_
+#endif
 
 };
 

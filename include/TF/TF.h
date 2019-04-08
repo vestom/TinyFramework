@@ -14,6 +14,7 @@
 // Automatic configure OS
 #ifdef __linux__
 #define _TF_OS_LINUX_
+#define _TF_HAL_LINUX_
 #endif
 
 namespace TF {
