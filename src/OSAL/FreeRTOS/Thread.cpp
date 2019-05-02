@@ -26,12 +26,13 @@ Thread::~Thread() {
 	}
 }
 
+
 void Thread::start(Priority pri) {
 	int ret;
 	if(thread_id) { Log::error("Attempt to start() an existing thread"); return; }
 
     // Create Task 1
-    ret = xTaskCreate(reinterpret_cast<TaskFunction_t>(&thread_func), "TaskX", configMINIMAL_STACK_SIZE, (void*)this, 1, &thread_id);
+    ret = xTaskCreate(reinterpret_cast<TaskFunction_t>(&thread_func), "X", configMINIMAL_STACK_SIZE, (void*)this, 1, &thread_id);
     if(ret != pdPASS) {
         // Task could not be created
         Log::error("xTaskCreate(): %s", ret);
@@ -42,6 +43,7 @@ void Thread::start(Priority pri) {
     }
 }
 
+
 void Thread::kill(void) {
 	if(thread_id) {
 	    vTaskDelete(thread_id);
@@ -50,8 +52,15 @@ void Thread::kill(void) {
 	Log::debug("Thread killed");
 }
 
+
 void Thread::sleep_ms(unsigned milliseconds) {
     vTaskDelay(pdMS_TO_TICKS(milliseconds));
+}
+
+
+void Thread::startScheduler(void) {
+    vTaskStartScheduler();
+    // We should never get here...
 }
 
 

@@ -86,6 +86,14 @@ void Thread::sleep_ms(unsigned milliseconds) {
 }
 
 
+void Thread::startScheduler(void) {
+    // Emulate embedded behaviour...
+    Log::debug("startScheduler()...");
+    while(1) { sleep_ms(10000); }
+    // We should never get here...
+}
+
+
 void Thread::thread_func(Thread* p_this) {
 	if(p_this)	{
 		Log::debug("Thread started");

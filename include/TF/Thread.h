@@ -34,8 +34,12 @@ public:
 	// Kill the thread
 	void kill(void);
 
-
+	// Sleep a number of milliseconds. 0 will yield.
 	static void sleep_ms(unsigned milliseconds);
+
+	// Never ending function to be called at end of main
+	// Needed for e.g. FreeRTOS
+	static void startScheduler(void);
 
 protected:
 	// Override this function
