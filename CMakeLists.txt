@@ -23,6 +23,7 @@ target_sources(${TF_TARGET} PRIVATE
     src/OSAL/Generic/MsgQueue.cpp
     src/OSAL/Zephyr/Event.cpp
     src/OSAL/Zephyr/Mutex.cpp
+    src/OSAL/Zephyr/Serial.cpp
     src/OSAL/Zephyr/Thread.cpp
     src/OSAL/Zephyr/Timer.cpp
 )
