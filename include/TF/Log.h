@@ -7,6 +7,7 @@
 
 #ifndef TF_LOG_H_
 #define TF_LOG_H_
+#include "TF/TF.h"
 
 namespace TF {
 

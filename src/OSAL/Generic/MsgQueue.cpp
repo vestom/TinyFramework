@@ -6,7 +6,6 @@
  */
 
 #include "TF/TF.h"
-#ifdef _TF_OS_LINUX_
 
 #include "TF/MsgQueue.h"
 #include "TF/Log.h"
@@ -62,5 +61,3 @@ int TF::MsgQueue::getMessagesInQueue() {
 }
 
 } /* namespace TF */
-
-#endif

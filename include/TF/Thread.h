@@ -8,6 +8,7 @@
 #ifndef TF_THREAD_H_
 #define TF_THREAD_H_
 
+// TODO: refactor OS specific data
 #ifdef _TF_OS_LINUX_
 #include <pthread.h>
 #endif
@@ -15,11 +16,15 @@
 #include "FreeRTOS.h"
 #include "os_task.h"
 #endif
+#ifdef _TF_OS_ZEPHYR_
+#include "zephyr.h"
+#endif
 
 namespace TF {
 
 class Thread {
 public:
+
 	Thread();
 	virtual ~Thread();
 
@@ -28,8 +33,13 @@ public:
 		NORMAL = 1
 	};
 
+#ifdef _TF_OS_ZEPHYR_
+	// Define stack statically with: K_THREAD_STACK_DEFINE(zephyr_stack, STACK_SIZE);
+	void start(k_thread_stack_t *zephyr_stack, size_t stack_size, Priority pri = Priority::NORMAL);
+#else
 	// Start the thread
 	void start(Priority pri = Priority::NORMAL);
+#endif
 
 	// Kill the thread
 	void kill(void);
@@ -54,6 +64,10 @@ private:
 #endif
 #ifdef _TF_OS_FREERTOS_
 	TaskHandle_t thread_id;
+#endif
+#ifdef _TF_OS_ZEPHYR_
+	k_tid_t thread_id;
+	struct k_thread thread_data;
 #endif
 
 };

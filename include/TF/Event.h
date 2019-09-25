@@ -15,6 +15,9 @@
 #include "FreeRTOS.h"
 #include "os_semphr.h"
 #endif
+#ifdef _TF_OS_ZEPHYR_
+#include "zephyr.h"
+#endif
 
 namespace TF {
 
@@ -43,6 +46,9 @@ private:
 #endif
 #ifdef _TF_OS_FREERTOS_
     SemaphoreHandle_t mutex_id;
+#endif
+#ifdef _TF_OS_ZEPHYR_
+    struct k_sem mutex_id;
 #endif
 
 };
