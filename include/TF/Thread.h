@@ -9,6 +9,7 @@
 #define TF_THREAD_H_
 
 // TODO: refactor OS specific data
+#include "TF/TF.h"
 #ifdef _TF_OS_LINUX_
 #include <pthread.h>
 #endif
@@ -17,7 +18,6 @@
 #include "os_task.h"
 #endif
 #ifdef _TF_OS_ZEPHYR_
-#include "zephyr.h"
 #endif
 
 namespace TF {

@@ -33,13 +33,11 @@ void Thread::start(k_thread_stack_t *zephyr_stack, size_t stack_size, Priority p
     // TODO: Implement priority...
     int priority = 5;
 
-    thread_id = k_thread_create(&thread_data, zephyr_stack,
-                                stack_size,
+    thread_id = k_thread_create(&thread_data, zephyr_stack, stack_size,
                                 reinterpret_cast<k_thread_entry_t>(&thread_func),
                                 (void*)this, NULL, NULL,
                                 priority, 0, K_NO_WAIT);
-Log::debug("Starting thread: stacksize %i", stack_size);
-
+    Log::debug("Starting thread: stacksize %i", stack_size);
 }
 
 

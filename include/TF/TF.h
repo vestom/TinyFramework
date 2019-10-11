@@ -14,6 +14,7 @@
 // Configure OS
 #ifdef __ZEPHYR__
 #define _TF_OS_ZEPHYR_
+#include <zephyr.h>
 
 #elif __linux__
 #define _TF_OS_LINUX_

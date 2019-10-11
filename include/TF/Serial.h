@@ -12,7 +12,6 @@
 #include <stdint.h>
 
 #ifdef _TF_OS_ZEPHYR_
-#include <zephyr.h>
 #include <drivers/uart.h>
 #endif
 
