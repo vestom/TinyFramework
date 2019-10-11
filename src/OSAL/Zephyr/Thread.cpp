@@ -30,8 +30,10 @@ Thread::~Thread() {
 void Thread::start(k_thread_stack_t *zephyr_stack, size_t stack_size, Priority pri) {
     if(thread_id) { Log::error("Attempt to start() an existing thread"); return; }
 
-    // TODO: Implement priority...
-    int priority = 5;
+    int priority = 1;   // Default priority
+    if(pri == Priority::HIGH) {
+        priority = 0;
+    }
 
     thread_id = k_thread_create(&thread_data, zephyr_stack, stack_size,
                                 reinterpret_cast<k_thread_entry_t>(&thread_func),
