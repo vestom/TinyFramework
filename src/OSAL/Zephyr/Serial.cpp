@@ -60,7 +60,7 @@ bool Serial::open(unsigned baudrate) {
 
 int Serial::read(uint8_t* buffer, unsigned count) {
     for (unsigned n=0; n<count; n++) {
-        while(getRxBytes() == 0) {};    // busy wait!
+        while(getRxBytes() == 0) { k_sleep(1); };    // busy wait!
         buffer[n] = rx_fifo[rx_tail];
         rx_tail = (rx_tail+1) % sizeof(rx_fifo);
     }
@@ -78,6 +78,7 @@ void Serial::write(uint8_t* buffer, unsigned count) {
         uart_poll_out(z_uart_dev, buffer[n]);
 #else   // Interrupt driven
         while(((tx_head - tx_tail) % sizeof(tx_fifo)) >= sizeof(tx_fifo)-1) { // Buffer full
+            k_sleep(1);
         }
         tx_fifo[tx_head] = buffer[n];
         tx_head = (tx_head+1) % sizeof(tx_fifo);
