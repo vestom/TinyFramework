@@ -28,7 +28,7 @@ Serial::Serial() {
 Serial::~Serial() {
 }
 
-bool Serial::open() {
+bool Serial::open(unsigned baudrate) {
     int ret;
     z_uart_dev = device_get_binding("UART_2");
     if(z_uart_dev == NULL) { Log::error("device_get_binding()"); return false; }
@@ -43,7 +43,7 @@ bool Serial::open() {
 
     // Configure
     struct uart_config cfg = {
-        .baudrate   = 19200,
+        .baudrate   = baudrate,
         .parity     = UART_CFG_PARITY_NONE,
         .stop_bits  = UART_CFG_STOP_BITS_1,
         .data_bits  = UART_CFG_DATA_BITS_8,

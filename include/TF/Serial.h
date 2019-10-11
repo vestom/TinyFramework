@@ -24,7 +24,7 @@ public:
 
 	/// Open the serial port
 	/// Return true if OK and false on error
-	bool open(void);
+	bool open(unsigned baudrate=19200);
 
 	/// Blocking read with timeout
 	int read(uint8_t *buffer, unsigned count);
