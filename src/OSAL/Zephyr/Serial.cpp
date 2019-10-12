@@ -60,7 +60,9 @@ bool Serial::open(unsigned baudrate) {
 
 int Serial::read(uint8_t* buffer, unsigned count) {
     for (unsigned n=0; n<count; n++) {
-        while(getRxBytes() == 0) { k_sleep(1); };    // busy wait!
+        while(getRxBytes() == 0) {  // Wait until something is received
+            rx_event.wait();
+        };
         buffer[n] = rx_fifo[rx_tail];
         rx_tail = (rx_tail+1) % sizeof(rx_fifo);
     }
@@ -78,7 +80,7 @@ void Serial::write(uint8_t* buffer, unsigned count) {
         uart_poll_out(z_uart_dev, buffer[n]);
 #else   // Interrupt driven
         while(((tx_head - tx_tail) % sizeof(tx_fifo)) >= sizeof(tx_fifo)-1) { // Buffer full
-            k_sleep(1);
+            k_sleep(1); // OK to busy wait due to FIFO
         }
         tx_fifo[tx_head] = buffer[n];
         tx_head = (tx_head+1) % sizeof(tx_fifo);
@@ -102,22 +104,33 @@ void Serial::z_uart_isr(Serial *pThis) {
 //    static int test = 0;
     int ret;
     int tx_ready, tx_complete;
+    size_t rx_bytes;
     uart_irq_update(pThis->z_uart_dev); // Must always be called once in beginning
 // gpio_pin_write(pThis->z_gpio_dev, 0, (test++)&1);
 
     // Rx
     ret = uart_irq_rx_ready(pThis->z_uart_dev);
     while(ret > 0) {
-        // Drain buffer (TODO: Handle buffer overflow)
+        // Drain buffer
         ret = uart_fifo_read(pThis->z_uart_dev, pThis->rx_fifo+pThis->rx_head, 1);
-        if(ret) pThis->rx_head = (pThis->rx_head+1) % sizeof(rx_fifo);
+        if(ret) {
+            rx_bytes = (pThis->rx_head - pThis->rx_tail) % sizeof(rx_fifo);
+            // If RX FIFO is not full, advance head
+            // otherwise just overwrite last byte...
+            if (rx_bytes < sizeof(rx_fifo)-1) {
+                pThis->rx_head = (pThis->rx_head+1) % sizeof(rx_fifo);
+            }
+        }
+        pThis->rx_event.set();
     }
 
     // Tx
     tx_ready = uart_irq_tx_ready(pThis->z_uart_dev);
     while(tx_ready > 0 && (pThis->tx_tail != pThis->tx_head)) {
         ret = uart_fifo_fill(pThis->z_uart_dev, pThis->tx_fifo+pThis->tx_tail, 1);
-        if(ret) { pThis->tx_tail = (pThis->tx_tail+1) % sizeof(tx_fifo); }
+        if(ret) {
+            pThis->tx_tail = (pThis->tx_tail+1) % sizeof(tx_fifo);
+        }
         tx_ready = uart_irq_tx_ready(pThis->z_uart_dev);
     }
 

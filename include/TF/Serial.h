@@ -11,6 +11,7 @@
 #include "TF/TF.h"
 
 #ifdef _TF_OS_ZEPHYR_
+#include "TF/Event.h"
 #include <drivers/uart.h>
 #endif
 
@@ -51,6 +52,7 @@ private:
 	u8_t tx_fifo[TF_SERIAL_FIFO_SIZE];
 	volatile size_t	rx_head = 0, rx_tail = 0;
 	volatile size_t	tx_head = 0, tx_tail = 0;
+    Event rx_event;
 #endif
 
 };
