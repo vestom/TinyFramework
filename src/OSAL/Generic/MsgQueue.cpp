@@ -15,10 +15,6 @@
 namespace TF {
 
 MsgQueue::MsgQueue() {
-	memset((void*)msg_data, 0, MAX_NUM_MSG * MAX_MSG_LEN);
-	memset((void*)msg_size, 0, MAX_NUM_MSG * sizeof(size_t));
-	tail = 0;
-	num_msg = 0;
 }
 
 MsgQueue::~MsgQueue() {

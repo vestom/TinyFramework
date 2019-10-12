@@ -9,7 +9,6 @@
 #define TF_SERIAL_H_
 
 #include "TF/TF.h"
-#include <stdint.h>
 
 #ifdef _TF_OS_ZEPHYR_
 #include <drivers/uart.h>
@@ -20,7 +19,7 @@ namespace TF {
 class Serial {
 public:
 	Serial();
-	virtual ~Serial();
+	~Serial();
 
 	/// Open the serial port
 	/// Return true if OK and false on error
@@ -50,8 +49,8 @@ private:
 	static void z_uart_isr(Serial *pThis);
 	u8_t rx_fifo[TF_SERIAL_FIFO_SIZE];
 	u8_t tx_fifo[TF_SERIAL_FIFO_SIZE];
-	volatile size_t	rx_head, rx_tail;
-	volatile size_t	tx_head, tx_tail;
+	volatile size_t	rx_head = 0, rx_tail = 0;
+	volatile size_t	tx_head = 0, tx_tail = 0;
 #endif
 
 };

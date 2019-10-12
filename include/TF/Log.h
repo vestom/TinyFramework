@@ -7,14 +7,15 @@
 
 #ifndef TF_LOG_H_
 #define TF_LOG_H_
+
 #include "TF/TF.h"
 
 namespace TF {
 
 class Log {
 public:
-	Log();
-	virtual ~Log();
+	//Log();
+	//~Log();
 
 	static void debug(const char *printf_format, ...);
 	static void error(const char *printf_format, ...);

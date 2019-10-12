@@ -8,6 +8,8 @@
 #ifndef TF_TIMER_H_
 #define TF_TIMER_H_
 
+#include "TF/TF.h"
+
 namespace TF {
 
 typedef unsigned long TimeStamp;
@@ -15,7 +17,7 @@ typedef unsigned long TimeStamp;
 class Timer {
 public:
 	Timer(TimeStamp _timeout_ms)	{ timeout_ms = _timeout_ms; reset(); };
-	virtual ~Timer() {};
+	~Timer() {};
 
 	/// Reset timer to current time
 	void reset(void)	{ timestamp = get_ms(); };

@@ -18,14 +18,13 @@ namespace TF {
 bool Log::logDebugOn = true;
 bool Log::logErrorOn = true;
 
-Log::Log() {
+//Log::Log() {
 	// TODO Auto-generated constructor stub
+//}
 
-}
-
-Log::~Log() {
+//Log::~Log() {
 	// TODO Auto-generated destructor stub
-}
+//}
 
 void Log::debug(const char* printf_format, ...) {
 	if(logDebugOn) {

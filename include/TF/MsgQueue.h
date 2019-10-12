@@ -8,9 +8,7 @@
 #ifndef TF_MSGQUEUE_H_
 #define TF_MSGQUEUE_H_
 
-#include <stddef.h>
-#include <stdint.h>
-
+#include "TF/TF.h"
 #include "TF/Mutex.h"
 #include "TF/Event.h"
 
@@ -19,7 +17,7 @@ namespace TF {
 class MsgQueue {
 public:
 	MsgQueue();
-	virtual ~MsgQueue();
+	~MsgQueue();
 
 	void send(uint8_t *buffer, size_t nBytes);
 
@@ -30,16 +28,16 @@ public:
 	/// Returns number of messages available in queue
 	int getMessagesInQueue();
 
-	static const unsigned MAX_MSG_LEN = 256;
-	static const unsigned MAX_NUM_MSG = 16;
+	static const unsigned MAX_MSG_LEN = 32;
+	static const unsigned MAX_NUM_MSG = 8;
 
 private:
 	Event txevent;
 	Mutex mutex;
-	volatile uint8_t msg_data[MAX_MSG_LEN][MAX_NUM_MSG];
-	volatile size_t  msg_size[MAX_NUM_MSG];
-	volatile size_t tail;
-	volatile size_t num_msg;
+	volatile uint8_t msg_data[MAX_MSG_LEN][MAX_NUM_MSG] = {0};
+	volatile size_t  msg_size[MAX_NUM_MSG] = {0};
+	volatile size_t tail = 0;
+	volatile size_t num_msg = 0;
 };
 
 } /* namespace TF */

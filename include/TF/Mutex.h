@@ -8,11 +8,12 @@
 #ifndef TF_MUTEX_H_
 #define TF_MUTEX_H_
 
+#include "TF/TF.h"
+
 #ifdef _TF_OS_LINUX_
 #include <pthread.h>
 #endif
 #ifdef _TF_OS_FREERTOS_
-#include "FreeRTOS.h"
 #include "os_semphr.h"
 #endif
 #ifdef _TF_OS_ZEPHYR_
@@ -23,7 +24,7 @@ namespace TF {
 class Mutex {
 public:
 	Mutex();
-	virtual ~Mutex();
+	~Mutex();
 	void lock();
 	void unlock();
 

@@ -8,8 +8,9 @@
 #ifndef TF_THREAD_H_
 #define TF_THREAD_H_
 
-// TODO: refactor OS specific data
 #include "TF/TF.h"
+
+// TODO: refactor OS specific data
 #ifdef _TF_OS_LINUX_
 #include <pthread.h>
 #endif
