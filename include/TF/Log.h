@@ -23,6 +23,8 @@ public:
 	static void setLogDebug(bool on);
 	static void setLogError(bool on);
 
+	static bool getLogDebug(void)	{ return logDebugOn; }
+
 private:
 	static bool logDebugOn;
 	static bool logErrorOn;
