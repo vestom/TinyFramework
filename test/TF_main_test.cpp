@@ -65,7 +65,7 @@ class MyThread3 : public TF::Thread {
 			}
 			// Bin2Hex
 			for (int n=0; n<ret; ++n) {
-				sprintf(str+n*3, "%02X ", (unsigned)rxBuffer[n]);
+				snprintf(str+n*2, sizeof(str)-n*2, "%02X", (unsigned)rxBuffer[n]);
 			}
 			TF::Log::debug("Received [%u] : %s @ %li us", ret, str, TF::Timer::get_tick()/1000);
 		}

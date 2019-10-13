@@ -16,7 +16,7 @@ typedef unsigned long TimeStamp;
 
 class Timer {
 public:
-	Timer(TimeStamp _timeout_ms)	{ timeout_ms = _timeout_ms; reset(); };
+	Timer(TimeStamp _timeout_ms) : timeout_ms(_timeout_ms)	{ reset(); };
 	~Timer() {};
 
 	/// Reset timer to current time
@@ -28,6 +28,9 @@ public:
 	/// Return true if timer has expired
 	/// Will wait _at least_ the requested timeout value (e.g. 1ms => [1;2])
 	bool is_expired(void)	const	{ return ( (get_ms()-timestamp) > timeout_ms); }; // Overflow OK!
+
+	/// Get number of milliseconds since timer reset
+	TimeStamp get_elapsed_ms(void)   const	{ return (get_ms()-timestamp); };
 
 	/// Get number of milliseconds since beginning
 	static TimeStamp get_ms(void);
