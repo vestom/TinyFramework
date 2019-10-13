@@ -15,17 +15,17 @@
 namespace TF {
 
 Mutex::Mutex() {
-	mutex_id = xSemaphoreCreateMutex();
-	if(mutex_id == 0) { Log::error("Could not initialize mutex"); }
+    mutex_id = xSemaphoreCreateMutex();
+    if(mutex_id == 0) { Log::error("Could not initialize mutex"); }
 }
 
 Mutex::~Mutex() {
-	if (mutex_id) vSemaphoreDelete(mutex_id);
+    if (mutex_id) vSemaphoreDelete(mutex_id);
 }
 
 void Mutex::lock() {
     BaseType_t ret = xSemaphoreTake(mutex_id, portMAX_DELAY);
-	if(ret != pdPASS) { Log::error("xSemaphoreTake(): %i", ret); }
+    if(ret != pdPASS) { Log::error("xSemaphoreTake(): %i", ret); }
 }
 
 void Mutex::unlock() {

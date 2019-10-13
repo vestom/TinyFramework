@@ -17,19 +17,19 @@
 namespace TF {
 
 Thread::Thread() {
-	thread_id = 0;
+    thread_id = 0;
 }
 
 Thread::~Thread() {
-	if(thread_id) {
-		kill();
-	}
+    if(thread_id) {
+        kill();
+    }
 }
 
 
 void Thread::start(Priority pri) {
-	int ret;
-	if(thread_id) { Log::error("Attempt to start() an existing thread"); return; }
+    int ret;
+    if(thread_id) { Log::error("Attempt to start() an existing thread"); return; }
 
     // Create Task 1
     ret = xTaskCreate(reinterpret_cast<TaskFunction_t>(&thread_func), "X", configMINIMAL_STACK_SIZE, (void*)this, 1, &thread_id);
@@ -45,11 +45,11 @@ void Thread::start(Priority pri) {
 
 
 void Thread::kill(void) {
-	if(thread_id) {
-	    vTaskDelete(thread_id);
-		thread_id = 0;
-	}
-	Log::debug("Thread killed");
+    if(thread_id) {
+        vTaskDelete(thread_id);
+        thread_id = 0;
+    }
+    Log::debug("Thread killed");
 }
 
 
@@ -65,12 +65,12 @@ void Thread::startScheduler(void) {
 
 
 void Thread::thread_func(Thread* p_this) {
-	if(p_this)	{
-		Log::debug("Thread started");
-		p_this->run();
-		Log::debug("Thread stopped");
-		p_this->thread_id = 0;		// Be sure thread ID is invalid
-	}
+    if(p_this)	{
+        Log::debug("Thread started");
+        p_this->run();
+        Log::debug("Thread stopped");
+        p_this->thread_id = 0;		// Be sure thread ID is invalid
+    }
 }
 
 } /* namespace TF */

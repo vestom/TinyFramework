@@ -23,19 +23,19 @@ namespace TF {
 
 class Event {
 public:
-	Event();
-	~Event();
+    Event();
+    ~Event();
 
-	// Wait for event to be set
-	// Set timeout to 0 to wait forever
-	// Will return false if wait timed out without being set
-	bool wait(unsigned timeout_ms = 0);
+    // Wait for event to be set
+    // Set timeout to 0 to wait forever
+    // Will return false if wait timed out without being set
+    bool wait(unsigned timeout_ms = 0);
 
-	// Set the event and signal any waiting threads
-	void set();
+    // Set the event and signal any waiting threads
+    void set();
 
-	// Test event without waiting or clearing
-	bool is_set();
+    // Test event without waiting or clearing
+    bool is_set();
 
 private:
 

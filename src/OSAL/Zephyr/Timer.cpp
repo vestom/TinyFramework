@@ -26,7 +26,7 @@ TimeStamp Timer::get_ms(void) {
 }
 
 TimeStamp Timer::get_tick(void) {
-	return (k_cycle_get_32());
+    return (k_cycle_get_32());
 }
 
 } /* namespace TF */

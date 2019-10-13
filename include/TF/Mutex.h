@@ -23,21 +23,21 @@ namespace TF {
 
 class Mutex {
 public:
-	Mutex();
-	~Mutex();
-	void lock();
-	void unlock();
+    Mutex();
+    ~Mutex();
+    void lock();
+    void unlock();
 
 private:
 
 #ifdef _TF_OS_LINUX_
-	pthread_mutex_t mutex_id;
+    pthread_mutex_t mutex_id;
 #endif
 #ifdef _TF_OS_FREERTOS_
-	SemaphoreHandle_t mutex_id;
+    SemaphoreHandle_t mutex_id;
 #endif
 #ifdef _TF_OS_ZEPHYR_
-	struct k_mutex mutex_id;
+    struct k_mutex mutex_id;
 #endif
 
 };

@@ -14,20 +14,20 @@ namespace TF {
 
 class Log {
 public:
-	//Log();
-	//~Log();
+    //Log();
+    //~Log();
 
-	static void debug(const char *printf_format, ...);
-	static void error(const char *printf_format, ...);
+    static void debug(const char *printf_format, ...);
+    static void error(const char *printf_format, ...);
 
-	static void setLogDebug(bool on);
-	static void setLogError(bool on);
+    static void setLogDebug(bool on);
+    static void setLogError(bool on);
 
-	static bool getLogDebug(void)	{ return logDebugOn; }
+    static bool getLogDebug(void)	{ return logDebugOn; }
 
 private:
-	static bool logDebugOn;
-	static bool logErrorOn;
+    static bool logDebugOn;
+    static bool logErrorOn;
 };
 
 } /* namespace TF */

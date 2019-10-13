@@ -27,7 +27,7 @@ TimeStamp Timer::get_ms(void) {
 }
 
 TimeStamp Timer::get_tick(void) {
-	return (xTaskGetTickCount());
+    return (xTaskGetTickCount());
 }
 
 } /* namespace TF */

@@ -17,23 +17,23 @@
 namespace TF {
 
 Mutex::Mutex() {
-	int ret = pthread_mutex_init(&mutex_id, NULL);
-	if(ret) { Log::error("Could not initialize mutex"); }
+    int ret = pthread_mutex_init(&mutex_id, NULL);
+    if(ret) { Log::error("Could not initialize mutex"); }
 }
 
 Mutex::~Mutex() {
-	int ret = pthread_mutex_destroy(&mutex_id);
-	if(ret) { Log::error("Could not destroy mutex"); }
+    int ret = pthread_mutex_destroy(&mutex_id);
+    if(ret) { Log::error("Could not destroy mutex"); }
 }
 
 void Mutex::lock() {
-	int ret = pthread_mutex_lock(&mutex_id);
-	if(ret) { Log::error("Could not lock mutex"); }
+    int ret = pthread_mutex_lock(&mutex_id);
+    if(ret) { Log::error("Could not lock mutex"); }
 }
 
 void Mutex::unlock() {
-	int ret = pthread_mutex_unlock(&mutex_id);
-	if(ret) { Log::error("Could not unlock mutex"); }
+    int ret = pthread_mutex_unlock(&mutex_id);
+    if(ret) { Log::error("Could not unlock mutex"); }
 }
 
 } /* namespace TF */
