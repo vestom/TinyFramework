@@ -16,7 +16,7 @@ typedef unsigned long TimeStamp;
 
 class Timer {
 public:
-    Timer(TimeStamp _timeout_ms) : timeout_ms(_timeout_ms)	{ reset(); };
+    Timer(TimeStamp _timeout_ms = 0) : timeout_ms(_timeout_ms)	{ reset(); };
     ~Timer() {};
 
     /// Reset timer to current time
