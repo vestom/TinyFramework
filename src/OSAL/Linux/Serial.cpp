@@ -33,11 +33,12 @@ Serial::~Serial() {
     }
 }
 
-bool Serial::open() {
+bool Serial::open(const char* port, unsigned baudrate) {
     int ret;
     struct termios options;
+    speed_t speed;
 
-    fd = ::open("/dev/ttyUSB0", O_RDWR | O_NOCTTY | O_NDELAY);	// O_NDELAY = No delay
+    fd = ::open(port, O_RDWR | O_NOCTTY | O_NDELAY);	// O_NDELAY = No delay
     if(fd == -1) { Log::error("Could not open /dev/ttyUSB0: %s", strerror(errno)); return false; }
     //ret = fcntl(fd, F_SETFL, FNDELAY);	// Do not block
     ret = fcntl(fd, F_SETFL, 0);	// Blocking behaviour
@@ -47,9 +48,20 @@ bool Serial::open() {
     ret = tcgetattr(fd, &options);
     if(ret) { Log::error("tcgetattr() failed with %i", ret); return false; }
     // Set the baud rates to 19200...
-    ret = cfsetispeed(&options, B19200);
+
+    switch(baudrate) {
+        case 9600:    speed = B9600;   break;
+        case 19200:   speed = B19200;  break;
+        case 38400:   speed = B38400;  break;
+        case 115200:  speed = B115200; break;
+        default:
+            Log::error("Unsupported baud rate %u\n", baudrate);
+            return false;
+    }
+
+    ret = cfsetispeed(&options, speed);
     if(ret) { Log::error("cfsetispeed() failed with %i", ret); return false; }
-    ret = cfsetospeed(&options, B19200);
+    ret = cfsetospeed(&options, speed);
     if(ret) { Log::error("cfsetospeed() failed with %i", ret); return false; }
     // Parity 8N1
     options.c_cflag &= ~PARENB;

@@ -28,9 +28,9 @@ Serial::Serial() {
 Serial::~Serial() {
 }
 
-bool Serial::open(unsigned baudrate) {
+bool Serial::open(const char *port, unsigned baudrate) {
     int ret;
-    z_uart_dev = device_get_binding("UART_2");
+    z_uart_dev = device_get_binding(port);
     if(z_uart_dev == NULL) { Log::error("device_get_binding()"); return false; }
 
 #ifdef TF_SERIAL_TXEN_CONTROL
