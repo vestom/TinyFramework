@@ -17,7 +17,6 @@
 namespace TF {
 
 Thread::Thread() {
-    thread_id = 0;
 }
 
 Thread::~Thread() {

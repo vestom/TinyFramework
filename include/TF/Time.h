@@ -13,6 +13,7 @@
 namespace TF {
 
 typedef unsigned long TimeStamp;
+typedef signed long TimeDelta;
 
 class Time {
 public:
@@ -23,7 +24,13 @@ public:
     void reset(void)	{ timestamp = get_ms(); };
 
     /// Set timer to have expired
-    void set(void)	{ timestamp = get_ms() - timeout_ms; };
+    void expire(void)	{ timestamp = get_ms() - timeout_ms; };
+
+    /// Set timer timeout
+    void set_timeout_ms(TimeStamp _timeout_ms)	{ timeout_ms = _timeout_ms; };
+
+    /// Get timer timeout
+    TimeStamp get_timeout_ms()	{ return timeout_ms; };
 
     /// Return true if timer has expired
     /// Will wait _at least_ the requested timeout value (e.g. 1ms => [1;2])
@@ -31,6 +38,10 @@ public:
 
     /// Get number of milliseconds since timer reset
     TimeStamp get_elapsed_ms(void)   const	{ return (get_ms()-timestamp); };
+
+    /// Get number of milliseconds until timer expires
+    /// Value is negative if timer has expired
+    TimeDelta get_remaining_ms(void)   const	{ return (TimeDelta)timeout_ms-get_elapsed_ms(); };
 
     /// Get number of milliseconds since beginning
     static TimeStamp get_ms(void);
