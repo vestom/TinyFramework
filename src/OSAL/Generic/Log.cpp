@@ -6,7 +6,7 @@
  */
 
 #include "TF/Log.h"
-#include "TF/Timer.h"
+#include "TF/Time.h"
 
 #include <stdio.h>
 #include <stdarg.h>
@@ -30,7 +30,7 @@ void Log::debug(const char* printf_format, ...) {
     if(logDebugOn) {
         va_list arglist;
         va_start(arglist, printf_format);
-        fprintf(_TF_LOG_FILE_, "L/D %ld ", TF::Timer::get_ms());
+        fprintf(_TF_LOG_FILE_, "L/D %ld ", TF::Time::get_ms());
         vfprintf(_TF_LOG_FILE_, printf_format, arglist);
         fprintf(_TF_LOG_FILE_, "\n");
         va_end(arglist);
@@ -41,7 +41,7 @@ void Log::error(const char* printf_format, ...) {
     if(logErrorOn) {
         va_list arglist;
         va_start(arglist, printf_format);
-        fprintf(_TF_LOG_FILE_, "L/E %ld ", TF::Timer::get_ms());
+        fprintf(_TF_LOG_FILE_, "L/E %ld ", TF::Time::get_ms());
         vfprintf(_TF_LOG_FILE_, printf_format, arglist);
         fprintf(_TF_LOG_FILE_, "\n");
         va_end(arglist);

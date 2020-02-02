@@ -1,12 +1,12 @@
 /*
- * Timer.h
+ * Time.h
  *
  *  Created on: Oct 19, 2016
  *      Author: tov
  */
 
-#ifndef TF_TIMER_H_
-#define TF_TIMER_H_
+#ifndef TF_TIME_H_
+#define TF_TIME_H_
 
 #include "TF/TF.h"
 
@@ -14,10 +14,10 @@ namespace TF {
 
 typedef unsigned long TimeStamp;
 
-class Timer {
+class Time {
 public:
-    Timer(TimeStamp _timeout_ms = 0) : timeout_ms(_timeout_ms)	{ reset(); };
-    ~Timer() {};
+    Time(TimeStamp _timeout_ms = 0) : timeout_ms(_timeout_ms)	{ reset(); };
+    ~Time() {};
 
     /// Reset timer to current time
     void reset(void)	{ timestamp = get_ms(); };

@@ -1,6 +1,5 @@
 // Abstract zephyr specific console functions
 #ifdef _TF_OS_ZEPHYR_
-#include <debug/tracing.h>
 #include <console/console.h>
 #include <ctype.h>
 

@@ -13,17 +13,17 @@ target_sources(${TF_TARGET} PRIVATE
     src/OSAL/FreeRTOS/Event.cpp
     src/OSAL/FreeRTOS/Mutex.cpp
     src/OSAL/FreeRTOS/Thread.cpp
-    src/OSAL/FreeRTOS/Timer.cpp
+    src/OSAL/FreeRTOS/Time.cpp
     src/OSAL/Linux/Event.cpp
     src/OSAL/Linux/Mutex.cpp
     src/OSAL/Linux/Serial.cpp
     src/OSAL/Linux/Thread.cpp
-    src/OSAL/Linux/Timer.cpp
+    src/OSAL/Linux/Time.cpp
     src/OSAL/Generic/Log.cpp
     src/OSAL/Generic/MsgQueue.cpp
     src/OSAL/Zephyr/Event.cpp
     src/OSAL/Zephyr/Mutex.cpp
     src/OSAL/Zephyr/Serial.cpp
     src/OSAL/Zephyr/Thread.cpp
-    src/OSAL/Zephyr/Timer.cpp
+    src/OSAL/Zephyr/Time.cpp
 )
