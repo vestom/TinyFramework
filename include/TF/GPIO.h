@@ -23,6 +23,8 @@ public:
 };
 
 
+// TODO: Refactor OS specific classes to separate files
+
 #ifdef _TF_OS_LINUX_
 
 class GPIO : GPIO_Interface {
@@ -83,8 +85,6 @@ private:
 };
 
 #endif
-
-
 
 
 } /* namespace TF */

@@ -1,4 +1,10 @@
-// Abstract zephyr specific console functions
+/*
+ * zephyr_extras.h
+ * Abstract zephyr specific console functions
+ *
+ *  Created on: Sep 29, 2019
+ *      Author: tov
+ */
 #ifdef _TF_OS_ZEPHYR_
 #include <console/console.h>
 #include <ctype.h>

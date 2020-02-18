@@ -21,6 +21,7 @@
 
 namespace TF {
 
+/// Event is a binary semaphore used to signal some event across threads
 class Event {
 public:
     Event();

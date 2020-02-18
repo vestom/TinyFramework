@@ -15,15 +15,11 @@
 #include <drivers/uart.h>
 
 //#define TF_SERIAL_POLLED        1
-#define TF_SERIAL_TXEN_CONTROL  1
-#define TF_SERIAL_TXEN_PORT     "GPIOA"
-#define TF_SERIAL_TXEN_PIN      1
-#define TF_SERIAL_TEST_PIN      0
 
 namespace TF {
 
-Serial::Serial() {
-}
+//Serial::Serial() {
+//}
 
 Serial::~Serial() {
 }
@@ -33,13 +29,7 @@ bool Serial::open(const char *port, unsigned baudrate) {
     z_uart_dev = device_get_binding(port);
     if(z_uart_dev == NULL) { Log::error("device_get_binding()"); return false; }
 
-#ifdef TF_SERIAL_TXEN_CONTROL
-    z_gpio_dev = device_get_binding(TF_SERIAL_TXEN_PORT);
-    if(z_gpio_dev == NULL) { Log::error("device_get_binding()"); return false; }
-    gpio_pin_configure(z_gpio_dev, TF_SERIAL_TXEN_PIN, GPIO_DIR_OUT);
-    gpio_pin_write(z_gpio_dev, TF_SERIAL_TXEN_PIN, 0);
-//gpio_pin_configure(z_gpio_dev, TF_SERIAL_TEST_PIN, GPIO_DIR_OUT);
-#endif
+    if(gpio_txen)   gpio_txen->set(false);
 
     // Configure
     struct uart_config cfg = {
@@ -70,9 +60,8 @@ int Serial::read(uint8_t* buffer, unsigned count) {
 }
 
 void Serial::write(uint8_t* buffer, unsigned count) {
-    if(z_gpio_dev) {    // Assert TX enable
-        gpio_pin_write(z_gpio_dev, TF_SERIAL_TXEN_PIN, 1);
-    }
+    // Assert TX enable
+    if(gpio_txen) gpio_txen->set(true);
 
     // Polled
     for(unsigned n=0; n<count; n++) {
@@ -106,7 +95,6 @@ void Serial::z_uart_isr(Serial *pThis) {
     int tx_ready, tx_complete;
     size_t rx_bytes;
     uart_irq_update(pThis->z_uart_dev); // Must always be called once in beginning
-// gpio_pin_write(pThis->z_gpio_dev, 0, (test++)&1);
 
     // Rx
     ret = uart_irq_rx_ready(pThis->z_uart_dev);
@@ -138,9 +126,8 @@ void Serial::z_uart_isr(Serial *pThis) {
     tx_complete = uart_irq_tx_complete(pThis->z_uart_dev);
     if((tx_complete > 0) && (pThis->tx_tail == pThis->tx_head)) {
         uart_irq_tx_disable(pThis->z_uart_dev); // Turn off!
-        if(pThis->z_gpio_dev) {     // Deassert TXEN
-            gpio_pin_write(pThis->z_gpio_dev, TF_SERIAL_TXEN_PIN, 0);
-        }
+        // Deassert TXEN
+        if(pThis->gpio_txen) pThis->gpio_txen->set(false);
     }
 }
 

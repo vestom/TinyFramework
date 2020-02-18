@@ -19,15 +19,22 @@ public:
     MsgQueue();
     ~MsgQueue();
 
+    /// Send a message
+    /// \param buffer is message to be sent
+    /// \param nBytes is size of buffer
     void send(uint8_t *buffer, size_t nBytes);
 
     /// Receive a message
-    /// Returns number of bytes received
+    /// \param buffer is array where message will be received
+    /// \param maxBytes is size of buffer
+    /// \param timeout_ms is maximum time to wait for message, 0 means forever
+    /// \return number of bytes received
     int receive(uint8_t *buffer, size_t maxBytes, unsigned timeout_ms=0);
 
-    /// Returns number of messages available in queue
+    /// \return number of messages available in queue
     int getMessagesInQueue();
 
+    // TODO: Make configurable, e.g. in constructor
     static const unsigned MAX_MSG_LEN = 32;
     static const unsigned MAX_NUM_MSG = 8;
 

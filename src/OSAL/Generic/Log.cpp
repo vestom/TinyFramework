@@ -11,11 +11,9 @@
 #include <stdio.h>
 #include <stdarg.h>
 
-
-
 namespace TF {
 
-bool Log::logDebugOn = true;
+bool Log::logDebugOn = false;
 bool Log::logErrorOn = true;
 
 //Log::Log() {

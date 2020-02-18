@@ -22,9 +22,8 @@
 
 namespace TF {
 
-Serial::Serial() {
-    fd = 0;
-}
+//Serial::Serial() {
+//}
 
 Serial::~Serial() {
     if(fd) {
@@ -39,7 +38,7 @@ bool Serial::open(const char* port, unsigned baudrate) {
     speed_t speed;
 
     fd = ::open(port, O_RDWR | O_NOCTTY | O_NDELAY);	// O_NDELAY = No delay
-    if(fd == -1) { Log::error("Could not open /dev/ttyUSB0: %s", strerror(errno)); return false; }
+    if(fd == -1) { Log::error("Could not open %s: %s", port, strerror(errno)); return false; }
     //ret = fcntl(fd, F_SETFL, FNDELAY);	// Do not block
     ret = fcntl(fd, F_SETFL, 0);	// Blocking behaviour
     if(ret == -1) { Log::error("fcntl() failed: %s ", strerror(errno)); return false; }

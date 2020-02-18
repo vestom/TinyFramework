@@ -21,6 +21,7 @@
 
 namespace TF {
 
+/// Mutual exclusion to protect access of data from multiple locations
 class Mutex {
 public:
     Mutex();
@@ -39,8 +40,19 @@ private:
 #ifdef _TF_OS_ZEPHYR_
     struct k_mutex mutex_id;
 #endif
-
 };
+
+
+/// Automatically lock and unlock a Mutex as a stack variable (like std::auto_ptr)
+class AutoMutex {
+public:
+    AutoMutex(Mutex &_mutex): mutex(_mutex) { mutex.lock(); }
+    ~AutoMutex() { mutex.unlock(); }
+
+private:
+    Mutex &mutex;
+};
+
 
 } /* namespace TF */
 

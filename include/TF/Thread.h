@@ -42,10 +42,11 @@ public:
     void start(Priority pri = Priority::NORMAL);
 #endif
 
-    // Kill the thread
+    // Kill the thread - be careful using this!!
     void kill(void);
 
     // Sleep a number of milliseconds. 0 will yield.
+    // Minimum time may be milliseconds minus OS tick length! (could be fixed by adding a tick...)
     static void sleep_ms(unsigned milliseconds);
 
     // Never ending function to be called at end of main
