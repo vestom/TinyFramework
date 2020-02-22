@@ -14,6 +14,28 @@
 
 // Add various functions missing from Zephyrs newlibc
 
+// Implement heap allocation routines (See: https://docs.zephyrproject.org/latest/reference/kernel/memory/heap.html)
+#ifdef TF_ZEPHYR_DYNAMIC_MEMORY
+
+#define malloc(s) (_tf_malloc(s, __FILE__, __LINE__))
+#define free(p) (_tf_free(p, __FILE__, __LINE__))
+
+inline void* _tf_malloc(size_t size, const char *file, int line) {
+    void *p = k_malloc(size);
+    #ifdef TF_DEBUG_ZEPHYR_DYNAMIC_MEMORY
+        TF::Log::debug("malloc(%u): %p, %s:%i", size, p, file, line);
+    #endif
+    return p;
+}
+
+inline void _tf_free(void *p, const char *file, int line) {
+    k_free(p);
+    #ifdef TF_DEBUG_ZEPHYR_DYNAMIC_MEMORY
+        TF::Log::debug("free(%p), %s:%i", p, file, line);
+    #endif
+}
+#endif // TF_ZEPHYR_DYNAMIC_MEMORY
+
 // <stdio.h> helpers
 #define getchar()   (console_getchar())
 #define putchar(c)  (console_putchar(c))
