@@ -26,4 +26,5 @@ target_sources(${TF_TARGET} PRIVATE
     src/OSAL/Zephyr/Serial.cpp
     src/OSAL/Zephyr/Thread.cpp
     src/OSAL/Zephyr/Time.cpp
+    src/OSAL/Zephyr/zephyr_extras.cpp
 )
