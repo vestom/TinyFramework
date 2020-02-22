@@ -19,10 +19,8 @@ Event::Event() {
     k_sem_init(&mutex_id, 0, 1);
 }
 
-
-Event::~Event() {
-}
-
+//Event::~Event() {
+//}
 
 bool Event::wait(unsigned timeout_ms) {
     s32_t timeout;

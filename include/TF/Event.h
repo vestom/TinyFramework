@@ -25,7 +25,10 @@ namespace TF {
 class Event {
 public:
     Event();
+
+#ifndef _TF_OS_ZEPHYR_
     ~Event();
+#endif
 
     // Wait for event to be set
     // Set timeout to 0 to wait forever

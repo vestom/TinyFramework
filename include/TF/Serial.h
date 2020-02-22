@@ -34,7 +34,9 @@ public:
     /// a serial transmitter (e.g. for EIA485)
     Serial(GPIO *txen=NULL): gpio_txen(txen) {};
 
+#ifdef _TF_OS_LINUX_
     ~Serial();
+#endif
 
     /// Open the serial port
     /// Return true if OK and false on error

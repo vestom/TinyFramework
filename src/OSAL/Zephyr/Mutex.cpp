@@ -18,8 +18,8 @@ Mutex::Mutex() {
     k_mutex_init(&mutex_id);
 }
 
-Mutex::~Mutex() {
-}
+//Mutex::~Mutex() {
+//}
 
 void Mutex::lock() {
     int ret = k_mutex_lock(&mutex_id, K_FOREVER);

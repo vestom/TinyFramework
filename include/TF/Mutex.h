@@ -25,8 +25,15 @@ namespace TF {
 class Mutex {
 public:
     Mutex();
+
+#ifndef _TF_OS_ZEPHYR_
     ~Mutex();
+#endif
+
+    /// Take the mutex
     void lock();
+
+    /// Release the mutex
     void unlock();
 
 private:

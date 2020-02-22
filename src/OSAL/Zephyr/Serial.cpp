@@ -18,12 +18,6 @@
 
 namespace TF {
 
-//Serial::Serial() {
-//}
-
-Serial::~Serial() {
-}
-
 bool Serial::open(const char *port, unsigned baudrate) {
     int ret;
     z_uart_dev = device_get_binding(port);
